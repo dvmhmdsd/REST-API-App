@@ -4,7 +4,14 @@ const Hero = require('../models/hero');
 
 // get list of heroes from db
 router.get('/heroes', (req, res, next) => {
-   res.send({type: 'GET'}); 
+    Hero.aggregate().near({
+        near: [parseFloat(req.query.lng), parseFloat(req.query.lat)],
+        maxDistance: 100000,
+        spherical: true,
+        distanceField: "dis"
+    }).then((heroes) => {
+        res.send(heroes);
+    });
 });
 
 // add a new hero
