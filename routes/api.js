@@ -19,7 +19,12 @@ router.post('/heroes', (req, res, next) => {
 
 // update a hero in db
 router.put('/heroes/:id', (req, res, next) => {
-    res.send({type: 'PUT'}); 
+    Hero.findByIdAndUpdate({_id: req.params.id}, req.body).then((hero) => {
+        // res.send(`here's the old record ${hero}`);
+        Hero.findOne({_id: req.params.id}).then((newHero) => {
+            res.send(`and here's the new one ${newHero}`);
+        });
+    });
 });
 
 // delete a hero from db
