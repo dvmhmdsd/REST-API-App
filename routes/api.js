@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Hero = require('../models/hero');
 
 // get list of heroes from db
 router.get('/heroes', (req, res) => {
@@ -8,7 +9,12 @@ router.get('/heroes', (req, res) => {
 
 // add a new hero
 router.post('/heroes', (req, res) => {
-    res.send({type: 'POST'}); 
+    /* let hero = new Hero(req.body);
+    hero.save(); */
+    // OR
+    Hero.create(req.body).then((hero) => { // this also creates an instance from Hero and then save it to the db
+        res.send(hero);
+    }); 
 });
 
 // update a hero in db

@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 let heroSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: [true, 'Name is required']
     },
     rank: {
         type: String,
     },
-    availability: {
+    available: {
         type: Boolean,
         default: false
     }
