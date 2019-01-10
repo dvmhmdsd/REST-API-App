@@ -1,7 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
+
+// connect to db
+mongoose.connect('mongodb://localhost/hero');
+mongoose.Promise = global.Promise;
 
 app.use(bodyParser.json());
 
